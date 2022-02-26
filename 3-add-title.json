@@ -1,0 +1,473 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TRH Toastmasters API",
+    "version": "v1"
+  },
+  "host": "yourwebapi.azurewebsites.net",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/Accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get active accounts",
+        "description": "Returns a list of accounts",
+        "operationId": "GetActiveAccounts",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountDto"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/Accounts/{accountId}/agendas": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get account agendas",
+        "description": "Returns a list of agendas for an account",
+        "operationId": "GetAgendasForAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "x-ms-summary": "Account ID",
+            "description": "Specify the unique identifier of the account for agenda",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "agendaTypeId",
+            "x-ms-summary": "Agenda Type ID",
+            "description": "Specify the unique identifier of the agenda type to filter by",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgendaDto"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/AgendaTemplates": {
+      "get": {
+        "tags": [
+          "AgendaTemplates"
+        ],
+        "summary": "Get agenda templates",
+        "description": "Returns a list of agenda templates",
+        "operationId": "GetAgendaTemplates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "accountId",
+            "x-ms-summary": "Account ID",
+            "description": "Specify the unique identifier of the account to filter by",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "agendaTypeId",
+            "x-ms-summary": "Agenda Type ID",
+            "description": "Specify the unique identifier of the agenda type to filter by",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgendaTemplateDto"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/AgendaTemplates/{agendaTemplateId}": {
+      "get": {
+        "tags": [
+          "AgendaTemplates"
+        ],
+        "summary": "Get agenda template",
+        "description": "Returns the agenda template by an ID",
+        "operationId": "GetAgendaTemplate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agendaTemplateId",
+            "x-ms-summary": "Agenda Template ID",
+            "description": "Specify the unique identifier of the agenda template",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgendaTemplateDto"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/AgendaTemplates/{agendaTemplateId}/schema": {
+      "get": {
+        "tags": [
+          "AgendaTemplates"
+        ],
+        "summary": "Get agenda template schema",
+        "description": "Returns the agenda template schema with agenda roles as properties",
+        "operationId": "GetAgendaTemplateSchema",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agendaTemplateId",
+            "x-ms-summary": "Agenda Template ID",
+            "description": "Specify the unique identifier of the agenda template",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/AgendaTemplates/{agendaTemplateId}/agendas": {
+      "get": {
+        "tags": [
+          "AgendaTemplates"
+        ],
+        "summary": "Get agenda template agendas",
+        "description": "Returns a list of agendas using the agenda template",
+        "operationId": "GetAgendaTemplateAgendas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agendaTemplateId",
+            "x-ms-summary": "Agenda Template ID",
+            "description": "Specify the unique identifier of the agenda template",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    },
+    "/api/AgendaTypes": {
+      "get": {
+        "tags": [
+          "AgendaTypes"
+        ],
+        "summary": "Get active agenda types",
+        "description": "Returns a list of agenda types",
+        "operationId": "GetActiveAgendaTypes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgendaTypeDto"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Account ID",
+          "description": "Unique identifier of the account",
+          "type": "string"
+        },
+        "name": {
+          "title": "Account Name",
+          "description": "Name of the account",
+          "type": "string"
+        }
+      }
+    },
+    "AgendaDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Agenda ID",
+          "description": "Unique identifier of the agenda",
+          "type": "string"
+        },
+        "name": {
+          "title": "Agenda Name",
+          "description": "Name of the agenda",
+          "type": "string"
+        },
+        "date": {
+          "format": "date-time",
+          "title": "Agenda Date",
+          "description": "Date of the agenda",
+          "type": "string"
+        },
+        "agendaTypeName": {
+          "title": "Agenda Type Name",
+          "description": "Name of the agenda type",
+          "type": "string"
+        },
+        "agendaTypeId": {
+          "format": "uuid",
+          "title": "Agenda Type ID",
+          "description": "Unique identifier of the agenda type",
+          "type": "string"
+        },
+        "accountName": {
+          "title": "Account Name",
+          "description": "Name of the account",
+          "type": "string"
+        },
+        "accountId": {
+          "format": "uuid",
+          "title": "Account ID",
+          "description": "Unique identifier of the account",
+          "type": "string"
+        }
+      }
+    },
+    "AgendaTemplateDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Agenda Template ID",
+          "description": "Unique identifier of the agenda template",
+          "type": "string"
+        },
+        "name": {
+          "title": "Agenda Template Name",
+          "description": "Name of the agenda template name",
+          "type": "string"
+        },
+        "agendaTypeName": {
+          "title": "Agenda Type Name",
+          "description": "Name of the agenda type",
+          "type": "string"
+        },
+        "agendaTypeId": {
+          "format": "uuid",
+          "title": "Agenda Type ID",
+          "description": "Unique identifier of the agenda type",
+          "type": "string"
+        },
+        "accountName": {
+          "title": "Account Name",
+          "description": "Name of the account",
+          "type": "string"
+        },
+        "accountId": {
+          "format": "uuid",
+          "title": "Account ID",
+          "description": "Unique identifier of the account",
+          "type": "string"
+        }
+      }
+    },
+    "AgendaTypeDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Agenda Type ID",
+          "description": "Unique identifier of the agenda type",
+          "type": "string"
+        },
+        "name": {
+          "title": "Agenda Type Name",
+          "description": "Name of the agenda type",
+          "type": "string"
+        }
+      }
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": { }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.windows.net/yourtenantid/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "Access Dataverse data"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [ ]
+    }
+  ]
+}
