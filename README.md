@@ -1,3 +1,3 @@
-# Exploring OpenAPI Extensions (Part 2) – Dynamic Values and Friends
+# Create Survey PCF Control Using Adaptive Cards Templating
 
-Accompanying GitHub repo to my blog post - [post](https://taerimhan.com/exploring-openapi-extensions-part-2-dynamic-values-and-friends/)
+Accompanying GitHub repo to my blog post - [post](https://taerimhan.com/create-survey-pcf-control-using-adaptive-cards-templating/)
